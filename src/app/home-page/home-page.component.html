@@ -1,0 +1,21 @@
+<!-- Navbar Home Page -->
+<div class="navbar" *ngIf="!loading">
+  <app-navbar class="w-full" [user]="user"></app-navbar>
+</div>
+<!-- Navbar Home Page -->
+
+<!-- Body Home Page -->
+<div class="body">
+  <router-outlet></router-outlet>
+
+</div>
+<!-- Body Home Page -->
+
+<!-- Footer Home Page -->
+<div class="footer">
+  <div></div>
+  <div class="copyright">
+    <span class="text-sm">COPYRIGHT © 2023 - CURRICULEAD</span>
+  </div>
+</div>
+<!-- Footer Home Page -->

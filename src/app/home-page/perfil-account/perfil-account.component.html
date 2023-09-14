@@ -1,0 +1,156 @@
+<div class="surface-section px-4 py-6 md:px-6 lg:px-8 text-center">
+  <!-- Title -->
+  <div class="flex flex-column">
+    <div class="mb-5 font-bold text-3xl">
+      <span class="text-900">{{ user?.name }} </span>
+    </div>
+  </div>
+  <!-- Title -->
+
+  <div class="flex justify-content-center gap-6 md:flex-row flex-column" *ngIf="!loading">
+    <!-- Informações Pessoais -->
+    <div class="col-12 md:col-6 lg:col-4">
+      <div class="flex mb-6">
+        <span class="text-900 text-2xl mb-3">Informações Pessoais</span>
+      </div>
+
+      <div class="flex align-items-center mb-3 gap-4">
+        <label for="name" class="block text-900 font-medium mb-2 w-4"
+          >Nome Completo</label
+        >
+        <input
+          id="name-register"
+          type="text"
+          placeholder="Nome Completo"
+          pInputText
+          class="mb-3 w-full"
+          name="name-login"
+          [(ngModel)]="user.name"
+        />
+      </div>
+
+      <div class="flex align-items-center mb-3 gap-4">
+        <label for="email" class="block text-900 font-medium mb-2 w-4"
+          >Email</label
+        >
+        <input
+          id="email-register"
+          type="text"
+          placeholder="E-mail"
+          pInputText
+          class="mb-3 w-full"
+          [(ngModel)]="user.email"
+          disabled
+        />
+      </div>
+
+      <div class="flex align-items-center mb-3 gap-4">
+        <label for="birthday" class="block text-900 font-medium mb-2 w-4"
+          >Data de Nascimento</label
+        >
+        <p-calendar
+          class="block text-900 font-medium mb-3 w-full"
+          dateFormat="dd/mm/yy"
+          [(ngModel)]="user.birthday"
+        ></p-calendar>
+      </div>
+
+      <div class="flex align-items-center mb-3 gap-4">
+        <label for="phone" class="block text-900 font-medium mb-2 w-4"
+          >Celular</label
+        >
+        <input
+          id="phone-info"
+          type="text"
+          placeholder="(99) 99999-9999"
+          pInputText
+          class="mb-3 w-full"
+          name="phone-info"
+          [(ngModel)]="user.phone"
+        />
+      </div>
+
+      <div class="flex align-items-center mb-3 gap-4">
+        <label for="state" class="block text-900 font-medium mb-2 w-4"
+          >Estado</label
+        >
+        <input
+          id="state-info"
+          type="text"
+          placeholder="Estado"
+          pInputText
+          class="mb-3 w-full"
+          name="state-info"
+          [(ngModel)]="user.state"
+        />
+      </div>
+
+      <div class="flex align-items-center mb-3 gap-4">
+        <label for="city" class="block text-900 font-medium mb-2 w-4"
+          >Cidade</label
+        >
+        <input
+          id="city-info"
+          type="text"
+          placeholder="Cidade"
+          pInputText
+          class="mb-3 w-full"
+          name="city-info"
+          [(ngModel)]="user.city"
+        />
+      </div>
+    </div>
+    <!-- Informações Pessoais -->
+
+    <!-- Informações Usuário -->
+    <div class="col-12 md:col-6 lg:col-4">
+      <div class="flex mb-6">
+        <span class="text-900 text-2xl mb-3">Links Externos</span>
+      </div>
+
+      <div class="flex align-items-center mb-3 gap-4">
+        <label for="state" class="block text-900 font-medium mb-2 w-2"
+          >Github</label
+        >
+        <input
+          id="github-info"
+          type="text"
+          placeholder="Link do Github"
+          pInputText
+          class="mb-3 w-full"
+          name="github-info"
+          [(ngModel)]="user.github"
+        />
+      </div>
+
+      <div class="flex align-items-center mb-3 gap-4">
+        <label for="city" class="block text-900 font-medium mb-2 w-2"
+          >Linkedin</label
+        >
+        <input
+          id="linkedin-info"
+          type="text"
+          placeholder="Link do Linkedin"
+          pInputText
+          class="mb-3 w-full"
+          name="linkedin-info"
+          [(ngModel)]="user.linkedin"
+        />
+      </div>
+
+      <div></div>
+      <!-- Informações Usuário -->
+    </div>
+
+    <div>
+      <button
+        pButton
+        pRipple
+        label="Salvar"
+        icon="pi pi-user"
+        class="w-full"
+        (click)="editUser()"
+      ></button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="text-center mb-5">
+  <img
+    src="assets/images/blocks/logos/hyper.svg"
+    alt="Image"
+    height="50"
+    class="mb-3"
+  />
+  <div class="text-900 text-3xl font-medium mb-3">Bem vindo de volta!</div>
+  <span class="text-600 font-medium line-height-3">Nao tem uma conta?</span>
+  <a
+    class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
+    [routerLink]="'/login/register'"
+    >Cadastre-se!</a
+  >
+</div>
+
+<div>
+  <label for="email" class="block text-900 font-medium mb-2">Email</label>
+  <input
+    id="email-login"
+    type="text"
+    placeholder="E-mail"
+    pInputText
+    class="w-full mb-3"
+    name="email-login"
+    [(ngModel)]="email"
+  />
+
+  <label for="password" class="block text-900 font-medium mb-2"
+    >Senha</label
+  >
+  <input
+    id="password-login"
+    type="password"
+    placeholder="Senha"
+    pInputText
+    class="w-full mb-3"
+    name="password-login"
+    [(ngModel)]="password"
+  />
+
+  <div class="flex align-items-end mb-6">
+    <a
+      class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
+      >Esqueceu a senha?</a
+    >
+  </div>
+
+  <button
+    pButton
+    pRipple
+    label="Login"
+    icon="pi pi-user"
+    class="w-full"
+    (click)="login()"
+  ></button>
+</div>

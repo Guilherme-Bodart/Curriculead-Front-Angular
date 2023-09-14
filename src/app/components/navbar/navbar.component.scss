@@ -1,0 +1,29 @@
+.menu {
+  display: flex;
+  gap: 24px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 16px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.menu-item:hover {
+  border-bottom: 2px solid var(--surface-400);
+  color: var(--surface-700);
+  cursor: pointer;
+}
+
+.menu-item:active,
+.menu-item.active {
+  border-bottom: 2px solid var(--blue-400);
+  color: var(--blue-800);
+}
+
+.pi {
+  font-size: 18px;
+}

@@ -1,0 +1,74 @@
+<div class="text-center mb-5">
+  <img
+    src="assets/images/blocks/logos/hyper.svg"
+    alt="Image"
+    height="50"
+    class="mb-3"
+  />
+  <div class="text-900 text-3xl font-medium mb-3">Cadastre-se agora!</div>
+</div>
+
+<div>
+  <label for="name" class="block text-900 font-medium mb-2"
+    >Nome Completo</label
+  >
+  <input
+    id="name-register"
+    type="text"
+    placeholder="Nome Completo"
+    pInputText
+    class="w-full mb-3"
+    name="name-login"
+    [(ngModel)]="newUser.name"
+  />
+
+  <label for="email" class="block text-900 font-medium mb-2">Email</label>
+  <input
+    id="email-register"
+    type="text"
+    placeholder="E-mail"
+    pInputText
+    class="w-full mb-3"
+    [(ngModel)]="newUser.email"
+  />
+
+  <label for="password" class="block text-900 font-medium mb-2">Senha</label>
+  <input
+    id="password-register"
+    type="password"
+    placeholder="Senha"
+    pInputText
+    class="w-full mb-3"
+    [(ngModel)]="newUser.password"
+  />
+
+  <label for="password" class="block text-900 font-medium mb-2"
+    >Confirmar Senha</label
+  >
+  <input
+    id="confirm-password-register"
+    type="password"
+    placeholder="Confirmar Senha"
+    pInputText
+    class="w-full mb-3"
+    [(ngModel)]="confirmPassword"
+  />
+
+  <button
+    [disabled]="disableButton()"
+    pButton
+    pRipple
+    label="Criar Conta"
+    icon="pi pi-user"
+    class="w-full"
+    (click)="registerUser()"
+  ></button>
+
+  <button
+    pButton
+    pRipple
+    label="Criar Conta"
+    icon="pi pi-user"
+    class="w-full"
+  ></button>
+</div>
