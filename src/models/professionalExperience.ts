@@ -31,8 +31,8 @@ export class ProfessionalExperience implements IRest {
       this.responsibility = data['responsibility'] || '';
       this.employer = data['employer'] || '';
       this.description = data['description'] || '';
-      this.startDate = data['startDate'] || new Date(2000, 1, 1);
-      this.endDate = data['endDate'] || new Date(2000, 1, 1);
+      this.startDate = data['startDate'] || undefined;
+      this.endDate = data['endDate'] || undefined;
       this.currentPosition = data['currentPosition'] || false;
     }
     return this;

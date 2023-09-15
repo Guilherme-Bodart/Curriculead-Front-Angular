@@ -1,13 +1,21 @@
-<div class="surface-section px-4 py-6 md:px-6 lg:px-8 text-center">
+<div class="surface-section px-4 pt-4 pb-6 md:px-6 lg:px-8 text-center">
   <!-- Title -->
   <div class="flex flex-column">
-    <div class="mb-5 font-bold text-3xl">
-      <span class="text-900">{{ user?.name }} </span>
+    <div class="flex flex-column mb-5 font-bold align-self-baseline">
+      <span class="text-900 text-4xl pb-1 mb-2 border-bottom-2 border-400"
+        >{{ user.name }}
+      </span>
+      <span class="text-600 text-xl">
+        Preencha suas informações pessoais.
+      </span>
     </div>
   </div>
   <!-- Title -->
 
-  <div class="flex justify-content-center gap-6 md:flex-row flex-column" *ngIf="!loading">
+  <div
+    class="flex justify-content-center gap-6 md:flex-row flex-column"
+    *ngIf="!loading"
+  >
     <!-- Informações Pessoais -->
     <div class="col-12 md:col-6 lg:col-4">
       <div class="flex mb-6">
@@ -15,26 +23,26 @@
       </div>
 
       <div class="flex align-items-center mb-3 gap-4">
-        <label for="name" class="block text-900 font-medium mb-2 w-4"
+        <label for="name" class="block text-900 font-medium mb-2 w-3 text-right text-xl"
           >Nome Completo</label
         >
         <input
-          id="name-register"
+          id="name-info"
           type="text"
           placeholder="Nome Completo"
           pInputText
           class="mb-3 w-full"
-          name="name-login"
+          name="name-info"
           [(ngModel)]="user.name"
         />
       </div>
 
       <div class="flex align-items-center mb-3 gap-4">
-        <label for="email" class="block text-900 font-medium mb-2 w-4"
+        <label for="email" class="block text-900 font-medium mb-2 w-3 text-right text-xl"
           >Email</label
         >
         <input
-          id="email-register"
+          id="email-info"
           type="text"
           placeholder="E-mail"
           pInputText
@@ -45,25 +53,26 @@
       </div>
 
       <div class="flex align-items-center mb-3 gap-4">
-        <label for="birthday" class="block text-900 font-medium mb-2 w-4"
+        <label for="birthday" class="block text-900 font-medium mb-2 w-3 text-right text-xl"
           >Data de Nascimento</label
         >
         <p-calendar
           class="block text-900 font-medium mb-3 w-full"
           dateFormat="dd/mm/yy"
           [(ngModel)]="user.birthday"
+          [readonlyInput]="true"
         ></p-calendar>
       </div>
 
       <div class="flex align-items-center mb-3 gap-4">
-        <label for="phone" class="block text-900 font-medium mb-2 w-4"
+        <label for="phone" class="block text-900 font-medium mb-2 w-3 text-right text-xl"
           >Celular</label
         >
-        <input
+        <p-inputMask
           id="phone-info"
           type="text"
+          mask="(99) 99999-9999"
           placeholder="(99) 99999-9999"
-          pInputText
           class="mb-3 w-full"
           name="phone-info"
           [(ngModel)]="user.phone"
@@ -71,7 +80,7 @@
       </div>
 
       <div class="flex align-items-center mb-3 gap-4">
-        <label for="state" class="block text-900 font-medium mb-2 w-4"
+        <label for="state" class="block text-900 font-medium mb-2 w-3 text-right text-xl"
           >Estado</label
         >
         <input
@@ -86,7 +95,7 @@
       </div>
 
       <div class="flex align-items-center mb-3 gap-4">
-        <label for="city" class="block text-900 font-medium mb-2 w-4"
+        <label for="city" class="block text-900 font-medium mb-2 w-3 text-right text-xl"
           >Cidade</label
         >
         <input
@@ -109,7 +118,7 @@
       </div>
 
       <div class="flex align-items-center mb-3 gap-4">
-        <label for="state" class="block text-900 font-medium mb-2 w-2"
+        <label for="state" class="block text-900 font-medium mb-2 w-2 text-right text-xl"
           >Github</label
         >
         <input
@@ -124,7 +133,7 @@
       </div>
 
       <div class="flex align-items-center mb-3 gap-4">
-        <label for="city" class="block text-900 font-medium mb-2 w-2"
+        <label for="city" class="block text-900 font-medium mb-2 w-2 text-right text-xl"
           >Linkedin</label
         >
         <input
@@ -138,19 +147,19 @@
         />
       </div>
 
-      <div></div>
       <!-- Informações Usuário -->
     </div>
+  </div>
 
-    <div>
-      <button
-        pButton
-        pRipple
-        label="Salvar"
-        icon="pi pi-user"
-        class="w-full"
-        (click)="editUser()"
-      ></button>
-    </div>
+  <div class="flex w-10 justify-content-end">
+    <button
+      pButton
+      pRipple
+      label="Salvar"
+      icon="pi pi-user"
+      iconPos="right"
+      class="p-button-lg"
+      (click)="editUser()"
+    ></button>
   </div>
 </div>

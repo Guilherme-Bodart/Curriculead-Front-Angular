@@ -26,8 +26,8 @@ export class AcademicEducation implements IRest {
     if (data) {
       this.courseName = data['courseName'] || '';
       this.schoolName = data['schoolName'] || '';
-      this.startDate = data['startDate'] || new Date(2000, 1, 1);
-      this.endDate = data['endDate'] || new Date(2000, 1, 1);
+      this.startDate = data['startDate'] || undefined;
+      this.endDate = data['endDate'] || undefined;
     }
     return this;
   }

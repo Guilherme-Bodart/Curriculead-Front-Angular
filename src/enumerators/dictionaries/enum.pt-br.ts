@@ -20,7 +20,7 @@ export const enumerators = {
   'CoreInformationIcon': {
     'WEBPAGE_EXCLUSIVE': 'pi pi-desktop',
     'RESPONSIVE_LOOK': 'pi pi-mobile',
-    'EASY_EDIT': 'pi pi-penci',
+    'EASY_EDIT': 'pi pi-pencil',
     'PDF_EXPORT': 'pi pi-download',
     'SHARING_AGILITY': 'pi pi-share-alt',
     'VARIOUS_LAYOUT': 'pi pi-table',

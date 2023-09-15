@@ -10,6 +10,7 @@ export class Curriculum implements IRest {
   className = 'Currículo';
 
   userId: string;
+  url: string;
   academicEducation: Array<AcademicEducation>;
   extraCourses: Array<ExtraCourse>;
   language: Array<Language>;
@@ -26,6 +27,7 @@ export class Curriculum implements IRest {
   Serialize() {
     const out = {
       userId: this.userId,
+      url: this.url,
       academicEducation: this.academicEducation.map((a) => a.Serialize()),
       extraCourses: this.extraCourses.map((e) => e.Serialize()),
       language: this.language.map((l) => l.Serialize()),
@@ -42,6 +44,7 @@ export class Curriculum implements IRest {
   Deserialize(data: any) {
     if (data) {
       this.userId = data['userId'] || undefined;
+      this.url = data['url'] || undefined;
       this.academicEducation = (data['academicEducation'] || []).map((a) => new AcademicEducation(a));
       this.extraCourses = (data['extraCourses'] || []).map((e) => new ExtraCourse(e));
       this.language = (data['language'] || []).map((l) => new Language(l));

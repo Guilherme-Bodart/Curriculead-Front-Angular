@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
         { label: 'Entrar', icon: 'pi pi-fw pi-sign-in' },
       ];
     }
-    console.log(window.location.href);
+
     if (window.location.href.includes('perfil')) this.activeItem = this.menuItems[2];
     else if (window.location.href.includes('curriculum')) this.activeItem = this.menuItems[1];
     else this.activeItem = this.menuItems[0];

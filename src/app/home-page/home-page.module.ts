@@ -12,6 +12,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
+import { InputMaskModule } from 'primeng/inputmask'
+import { InputTextareaModule } from 'primeng/inputtextarea'
+import { RatingModule } from 'primeng/rating';
 
 const routes: Routes = [
   {
@@ -41,7 +44,10 @@ const routes: Routes = [
     InputTextModule,
     ButtonModule,
     FormsModule,
-    CalendarModule
+    CalendarModule,
+    InputMaskModule,
+    InputTextareaModule,
+    RatingModule,
   ],
   exports: [RouterModule],
 
