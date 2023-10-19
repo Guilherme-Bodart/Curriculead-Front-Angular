@@ -7,6 +7,7 @@ import { ProfessionalExperience } from 'src/models/professionalExperience';
 import { Skill } from 'src/models/skill';
 import { User } from 'src/models/user';
 import { AuthenticateService } from 'src/services/authenticate.service';
+import { CurriculumService } from 'src/services/curriculum.service';
 import { UserService } from 'src/services/user.service';
 
 @Component({
@@ -25,6 +26,7 @@ export class CurriculumComponent implements OnInit {
   constructor(
     private _authenticateService: AuthenticateService,
     private _userService: UserService,
+    private _curriculumService: CurriculumService,
     private _router: Router,
   ) { }
 
@@ -63,6 +65,10 @@ export class CurriculumComponent implements OnInit {
   }
 
   saveCurriculum() {
+    this._curriculumService.createCurriculum(this.curriculum).subscribe((res)=>{
+      console.log(res);
+
+    })
     console.log('save', this.curriculum);
   }
 
