@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/models/user';
 import { AuthenticateService } from 'src/services/authenticate.service';
+import { ToastService } from 'src/services/toast.service';
 import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-perfil-account',
   templateUrl: './perfil-account.component.html',
-  styleUrls: ['./perfil-account.component.scss']
+  styleUrls: ['./perfil-account.component.scss'],
 })
-
 export class PerfilAccountComponent implements OnInit {
-
   user = new User({});
   loading = true;
 
@@ -19,19 +18,31 @@ export class PerfilAccountComponent implements OnInit {
     private _authenticateService: AuthenticateService,
     private _userService: UserService,
     private _router: Router,
-  ) { }
+    private _toastService: ToastService,
+
+  ) {}
 
   ngOnInit(): void {
     this.user = this._authenticateService.loggedUser;
-    console.log(this._authenticateService.loggedUser);
-
-    if(this.user) this.loading = false
-    this.user.birthday = new Date(this.user.birthday)
+    if (this.user) {
+      this.updateUser();
+    }
   }
 
   editUser() {
     this._userService.editUser(this.user).subscribe((res) => {
-      this._authenticateService.doLoginUser({ res })
-    })
+      this._authenticateService.doLoginUser({ res });
+      this._toastService.showSuccess('Perfil Atualizado com Sucesso!');
+
+    });
+  }
+
+  updateUser() {
+    this._userService.getUserId(this.user._id).subscribe((res: any) => {
+      this._authenticateService.storeUser(res.user);
+      if (this.user.birthday) this.user.birthday = new Date(this.user.birthday);
+      else new Date();
+      this.loading = false;
+    });
   }
 }

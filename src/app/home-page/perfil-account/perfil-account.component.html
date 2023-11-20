@@ -11,6 +11,7 @@
     </div>
   </div>
   <!-- Title -->
+  <app-loading-page *ngIf="loading"></app-loading-page>
 
   <div
     class="flex justify-content-center gap-6 md:flex-row flex-column"
@@ -60,7 +61,6 @@
           class="block text-900 font-medium mb-3 w-full"
           dateFormat="dd/mm/yy"
           [(ngModel)]="user.birthday"
-          [readonlyInput]="true"
         ></p-calendar>
       </div>
 

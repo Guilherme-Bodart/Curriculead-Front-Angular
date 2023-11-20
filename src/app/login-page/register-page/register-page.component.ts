@@ -31,7 +31,6 @@ export class RegisterPageComponent implements OnInit {
 
   registerUser() {
     this._authenticateService.createUser(this.newUser).subscribe((res) => {
-      console.log(res)
       this._toastService.showSuccess('Usuário Criado com sucesso!');
       this._router.navigate([`/login`]);
     })

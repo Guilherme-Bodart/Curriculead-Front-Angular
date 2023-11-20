@@ -8,7 +8,7 @@ import { StyleCurriculum } from './styleCurriculum';
 
 export class Curriculum implements IRest {
   className = 'Currículo';
-
+  _id: string;
   userId: string;
   url: string;
   academicEducation: Array<AcademicEducation>;
@@ -26,6 +26,7 @@ export class Curriculum implements IRest {
 
   Serialize() {
     const out = {
+      _id: this._id,
       userId: this.userId,
       url: this.url,
       academicEducation: this.academicEducation.map((a) => a.Serialize()),
@@ -43,6 +44,7 @@ export class Curriculum implements IRest {
 
   Deserialize(data: any) {
     if (data) {
+      this._id = data['_id'] || undefined;
       this.userId = data['userId'] || undefined;
       this.url = data['url'] || undefined;
       this.academicEducation = (data['academicEducation'] || []).map((a) => new AcademicEducation(a));

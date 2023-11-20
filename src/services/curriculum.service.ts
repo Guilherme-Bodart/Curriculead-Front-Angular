@@ -13,6 +13,7 @@ export class CurriculumService {
   public loggedUser: User;
   private endpoint = 'http://localhost:3030'
   private _urlCurriculum = '/curriculum/';
+  private _urlCurriculumUrl = '/auth/curriculum/';
 
   constructor(
     private _http: HttpClient,
@@ -27,6 +28,29 @@ export class CurriculumService {
     });
     const url = this.endpoint + this._urlCurriculum;
     return this._http.post(url, curriculum, { headers });
+  }
+
+  updateCurriculum(curriculum: Curriculum){
+    const token = this._authenticateService.getJwtToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    const url = this.endpoint + this._urlCurriculum + curriculum._id;
+    return this._http.put(url, curriculum, { headers });
+  }
+
+  getCurriculumUserId(userId){
+    const token = this._authenticateService.getJwtToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    const url = this.endpoint + this._urlCurriculum + userId;
+    return this._http.get(url, { headers });
+  }
+
+  getCurriculumUrl(urlCurriculum){
+    const url = this.endpoint + this._urlCurriculumUrl + urlCurriculum;
+    return this._http.get(url);
   }
 
 }

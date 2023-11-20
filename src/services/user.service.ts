@@ -22,11 +22,7 @@ export class UserService {
 
   // Edit usuário com método PUT
   editUser(user: User) {
-    console.log(this._authenticateService.getJwtToken());
-
     const token = this._authenticateService.getJwtToken();
-    console.log(token);
-
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
@@ -43,12 +39,12 @@ export class UserService {
     return this._http.get(url, { headers });
   }
 
-  getUserId(user: User) {
+  getUserId(userId) {
     const token = this._authenticateService.getJwtToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    const url = this.endpoint + this._urlUser + user._id;
+    const url = this.endpoint + this._urlUser + userId;
     return this._http.get(url, { headers });
   }
 }

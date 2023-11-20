@@ -5,10 +5,11 @@ export class ProfessionalExperience implements IRest {
 
   responsibility: string;
   employer: string;
+  office: string;
   description: string;
   startDate: Date;
   endDate: Date;
-  currentPosition: Date;
+  currentPosition: boolean;
 
   constructor(data?: any) {
     if (data) this.Deserialize(data);
@@ -17,6 +18,7 @@ export class ProfessionalExperience implements IRest {
   Serialize() {
     const out = {
       responsibility: this.responsibility,
+      office: this.office,
       employer: this.employer,
       description: this.description,
       startDate: this.startDate,
@@ -29,6 +31,7 @@ export class ProfessionalExperience implements IRest {
   Deserialize(data: any) {
     if (data) {
       this.responsibility = data['responsibility'] || '';
+      this.office = data['office'] || '';
       this.employer = data['employer'] || '';
       this.description = data['description'] || '';
       this.startDate = data['startDate'] || undefined;

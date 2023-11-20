@@ -1,7 +1,7 @@
 import { IRest } from './rest.interface';
 
 export class Skill implements IRest {
-  className = 'Cursos Extras';
+  className = 'Habilidades';
 
   name: string;
   level: string;

@@ -41,8 +41,6 @@ export class AuthenticateService {
   // Handle login
   doLoginUser(data) {
     this.loggedUser = data.user;
-    console.log(data);
-
     if (data.user)
       this.storeUser(data.user);
     if (data.token)
@@ -58,8 +56,6 @@ export class AuthenticateService {
   // Retorna o JWT token do localstorage
   getJwtToken() {
     let token = localStorage.getItem(this.JWT_TOKEN);
-    console.log(token);
-
     return token;
   }
 

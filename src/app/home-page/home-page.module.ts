@@ -12,9 +12,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
-import { InputMaskModule } from 'primeng/inputmask'
-import { InputTextareaModule } from 'primeng/inputtextarea'
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { RatingModule } from 'primeng/rating';
+import { PublicPageComponent } from './public-page/public-page.component';
+import { DividerModule } from 'primeng/divider';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 const routes: Routes = [
   {
@@ -23,8 +26,15 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       { path: 'perfil', component: PerfilAccountComponent },
-      { path: 'curriculum', component: CurriculumComponent },
-    ]
+      {
+        path: 'curriculum',
+        component: CurriculumComponent,
+      },
+      {
+        path: 'curriculum/:url',
+        component: PublicPageComponent,
+      },
+    ],
   },
 ];
 
@@ -33,7 +43,8 @@ const routes: Routes = [
     HomePageComponent,
     PerfilAccountComponent,
     CurriculumComponent,
-    HomeComponent
+    HomeComponent,
+    PublicPageComponent,
   ],
   imports: [
     CommonModule,
@@ -48,8 +59,9 @@ const routes: Routes = [
     InputMaskModule,
     InputTextareaModule,
     RatingModule,
+    DividerModule,
+    InputSwitchModule,
   ],
   exports: [RouterModule],
-
 })
-export class HomePageModule { }
+export class HomePageModule {}
