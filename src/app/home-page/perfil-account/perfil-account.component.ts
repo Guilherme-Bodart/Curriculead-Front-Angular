@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/models/user';
 import { AuthenticateService } from 'src/services/authenticate.service';
-import { ToastService } from 'src/services/toast.service';
 import { UserService } from 'src/services/user.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-perfil-account',
   templateUrl: './perfil-account.component.html',
   styleUrls: ['./perfil-account.component.scss'],
+  providers: [MessageService],
 })
 export class PerfilAccountComponent implements OnInit {
   user = new User({});
@@ -18,8 +19,7 @@ export class PerfilAccountComponent implements OnInit {
     private _authenticateService: AuthenticateService,
     private _userService: UserService,
     private _router: Router,
-    private _toastService: ToastService,
-
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -30,10 +30,14 @@ export class PerfilAccountComponent implements OnInit {
   }
 
   editUser() {
-    this._userService.editUser(this.user).subscribe((res) => {
-      this._authenticateService.doLoginUser({ res });
-      this._toastService.showSuccess('Perfil Atualizado com Sucesso!');
-
+    this._userService.editUser(this.user).subscribe((res: any) => {
+      this._authenticateService.storeUser(res.user);
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Perfil alterado com sucesso!',
+        life: 3000,
+      });
     });
   }
 

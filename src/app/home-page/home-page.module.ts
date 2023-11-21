@@ -18,6 +18,7 @@ import { RatingModule } from 'primeng/rating';
 import { PublicPageComponent } from './public-page/public-page.component';
 import { DividerModule } from 'primeng/divider';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { ToastModule } from 'primeng/toast';
 
 const routes: Routes = [
   {
@@ -61,6 +62,7 @@ const routes: Routes = [
     RatingModule,
     DividerModule,
     InputSwitchModule,
+    ToastModule
   ],
   exports: [RouterModule],
 })

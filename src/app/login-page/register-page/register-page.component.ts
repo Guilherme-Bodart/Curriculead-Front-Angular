@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/models/user';
 import { AuthenticateService } from 'src/services/authenticate.service';
-import { ToastService } from 'src/services/toast.service';
 
 @Component({
   selector: 'app-register-page',
@@ -14,7 +13,6 @@ export class RegisterPageComponent implements OnInit {
 
   constructor(
     private _authenticateService: AuthenticateService,
-    private _toastService: ToastService,
     private _router: Router,
   ) { }
 
@@ -31,7 +29,6 @@ export class RegisterPageComponent implements OnInit {
 
   registerUser() {
     this._authenticateService.createUser(this.newUser).subscribe((res) => {
-      this._toastService.showSuccess('Usuário Criado com sucesso!');
       this._router.navigate([`/login`]);
     })
   }

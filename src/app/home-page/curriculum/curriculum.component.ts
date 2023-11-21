@@ -8,13 +8,14 @@ import { Skill } from 'src/models/skill';
 import { User } from 'src/models/user';
 import { AuthenticateService } from 'src/services/authenticate.service';
 import { CurriculumService } from 'src/services/curriculum.service';
-import { ToastService } from 'src/services/toast.service';
 import { UserService } from 'src/services/user.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-curriculum',
   templateUrl: './curriculum.component.html',
   styleUrls: ['./curriculum.component.scss'],
+  providers: [MessageService],
 })
 export class CurriculumComponent implements OnInit {
   user = new User({});
@@ -28,7 +29,7 @@ export class CurriculumComponent implements OnInit {
     private _curriculumService: CurriculumService,
     private _router: Router,
     private activatedRoute: ActivatedRoute,
-    private _toastService: ToastService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -84,18 +85,35 @@ export class CurriculumComponent implements OnInit {
       this._curriculumService
         .updateCurriculum(this.curriculum)
         .subscribe((res: any) => {
+          this.loading = true;
           this.curriculum = res.curriculum;
-          this._toastService.showSuccess('Currículo Atualizado com Sucesso!');
-          window.location.reload();
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Currículo Editado com Sucesso!',
+            life: 3000,
+          });
+          setTimeout(() => {
+            this.loading = false
+            window.location.reload();
+          }, 3000);
         });
     } else {
       this._curriculumService
         .createCurriculum(this.curriculum)
         .subscribe((res: any) => {
           this.curriculum = res.curriculum;
-          this._toastService.showSuccess('Currículo Criado com Sucesso!');
-
-          window.location.reload();
+          this.loading = true;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Currículo Criado com Sucesso!',
+            life: 3000,
+          });
+          setTimeout(() => {
+            this.loading = false;
+            window.location.reload();
+          }, 3000);
         });
     }
   }
@@ -122,5 +140,4 @@ export class CurriculumComponent implements OnInit {
       if (indexPE != index) experience.currentPosition = false;
     });
   }
-
 }

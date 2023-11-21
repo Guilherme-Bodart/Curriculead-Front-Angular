@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CoreInformationEnum } from 'src/enumerators';
 import { User } from 'src/models/user';
 import { AuthenticateService } from 'src/services/authenticate.service';
 
@@ -8,6 +7,7 @@ import { AuthenticateService } from 'src/services/authenticate.service';
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
+
 })
 export class HomePageComponent implements OnInit {
   user = new User({});

@@ -1,21 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AcademicEducation } from 'src/models/academicEducation';
+import * as html2pdf from 'html2pdf.js';
 import { Curriculum } from 'src/models/curriculum';
-import { Language } from 'src/models/language';
-import { ProfessionalExperience } from 'src/models/professionalExperience';
-import { Skill } from 'src/models/skill';
 import { User } from 'src/models/user';
 import { AuthenticateService } from 'src/services/authenticate.service';
 import { CurriculumService } from 'src/services/curriculum.service';
 import { UserService } from 'src/services/user.service';
-import * as html2pdf from 'html2pdf.js';
-import { ToastService } from 'src/services/toast.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-public-page',
   templateUrl: './public-page.component.html',
   styleUrls: ['./public-page.component.scss'],
+  providers: [MessageService],
 })
 export class PublicPageComponent implements OnInit {
   user = new User({});
@@ -31,7 +28,7 @@ export class PublicPageComponent implements OnInit {
     private _curriculumService: CurriculumService,
     private _router: Router,
     private activatedRoute: ActivatedRoute,
-    private _toastService: ToastService
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -50,8 +47,15 @@ export class PublicPageComponent implements OnInit {
           });
       },
       error: (err) => {
-        this._router.navigate(['/']);
-        this._toastService.showError('Link não Encontrado!');
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Link não encontrado!',
+          life: 3000,
+        });
+        setTimeout(() => {
+          this._router.navigate(['/']);
+        }, 3000);
       },
     });
   }
