@@ -1,10 +1,11 @@
+import { CurriculumStyleEnum } from 'src/enumerators/curriculumType.enum';
 import { IRest } from './rest.interface';
 
 export class StyleCurriculum implements IRest {
   className = 'Estilo do Currículo';
 
   name: string;
-  color: string;
+  color: CurriculumStyleEnum;
 
   constructor(data?: any) {
     if (data) this.Deserialize(data);
@@ -21,7 +22,7 @@ export class StyleCurriculum implements IRest {
   Deserialize(data: any) {
     if (data) {
       this.name = data['name'] || '';
-      this.color = data['color'] || '';
+      this.color = data['color'] || CurriculumStyleEnum.Default;
     }
     return this;
   }

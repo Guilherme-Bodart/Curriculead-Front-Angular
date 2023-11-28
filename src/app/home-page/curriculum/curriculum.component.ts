@@ -10,6 +10,8 @@ import { AuthenticateService } from 'src/services/authenticate.service';
 import { CurriculumService } from 'src/services/curriculum.service';
 import { UserService } from 'src/services/user.service';
 import { MessageService } from 'primeng/api';
+import { StyleCurriculum } from 'src/models/styleCurriculum';
+import { CurriculumStyleEnum } from 'src/enumerators/curriculumType.enum';
 
 @Component({
   selector: 'app-curriculum',
@@ -82,6 +84,10 @@ export class CurriculumComponent implements OnInit {
 
   saveCurriculum() {
     if (this.curriculum.userId) {
+      this.curriculum.styleCurriculum = new StyleCurriculum({
+        color: CurriculumStyleEnum.Default,
+        name: 'Estilo',
+      });
       this._curriculumService
         .updateCurriculum(this.curriculum)
         .subscribe((res: any) => {
@@ -94,7 +100,7 @@ export class CurriculumComponent implements OnInit {
             life: 3000,
           });
           setTimeout(() => {
-            this.loading = false
+            this.loading = false;
             window.location.reload();
           }, 3000);
         });

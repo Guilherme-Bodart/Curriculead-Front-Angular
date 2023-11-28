@@ -1,120 +1,53 @@
 <div class="flex align-items-center justify-content-evenly pb-5">
   <app-loading-page *ngIf="loading"></app-loading-page>
   <div *ngIf="!loading"></div>
-  <div *ngIf="!loading" id="curriculum">
-    <div class="header">
-      <div class="name-profession">
-        <span class="name">{{ user.name }}</span>
-        <span class="profession">{{ currentPosition.employer }}</span>
-      </div>
-      <div class="contact">
-        <a [href]="user.github" class="no-underline font-bold">{{
-          user.github.split("//")[1]
-        }}</a>
-        <a [href]="user.linkedin" class="no-underline font-bold">{{
-          user.linkedin.split("//")[1].split("www.")[1]
-        }}</a>
-        <a class="email">{{ user.email }}</a>
-        <a class="phone">{{ user.phone }}</a>
-      </div>
-    </div>
-    <p-divider></p-divider>
-    <div class="about-me">
-      {{ curriculum.aboutMe }}
-    </div>
-    <p-divider></p-divider>
-    <div class="flex flex-column">
-      <div class="flex gap-5">
-        <div class="flex flex-column w-6">
-          <span class="name mb-2"> Experiência </span>
-          <div
-            class="flex flex-column gap-1"
-            [ngClass]="{
-              'mb-3': i < curriculum.professionalExperience.length - 1
-            }"
-            *ngFor="
-              let experience of curriculum.professionalExperience;
-              index as i
-            "
-          >
-            <span class="title">{{ experience.employer }} </span>
-            <span class="title">{{ experience.office }}</span>
-            <span class="head">{{
-              (experience.startDate | date : "MMM d, y") +
-                " - " +
-                (experience.endDate
-                  ? (experience.endDate | date : "MMM d, y")
-                  : "Atual")
-            }}</span>
-            <span class="head">{{ experience.responsibility }}</span>
-            <span class="description">{{ experience.description }}</span>
-          </div>
-        </div>
 
-        <div class="flex flex-column w-6">
-          <span class="name mb-2"> Formação </span>
-          <div
-            class="flex flex-column gap-1"
-            [ngClass]="{
-              'mb-3': i < curriculum.professionalExperience.length - 1
-            }"
-            *ngFor="let education of curriculum.academicEducation; index as i"
-          >
-            <span class="title">{{
-              education.schoolName + " - " + education.courseName
-            }}</span>
-            <span class="head">{{
-              (education.startDate | date : "MMM d, y") +
-                " - " +
-                (education.endDate
-                  ? (education.endDate | date : "MMM d, y")
-                  : "Atual")
-            }}</span>
-          </div>
-        </div>
-      </div>
-      <p-divider></p-divider>
+  <div *ngIf="!loading" [id]="'curriculum'">
+    <app-curriculum-default
+      *ngIf="curriculum.styleCurriculum.color == curriculumStyleEnum.Default"
+      [user]="user"
+      [curriculum]="curriculum"
+    >
+    </app-curriculum-default>
 
-      <div class="flex justify-content-between">
-        <div class="flex flex-column">
-          <span class="name mb-3"> Habilidades e Idiomas </span>
-          <div
-            class="flex flex-column gap-3 flex-wrap"
-            style="max-height: 240px"
-          >
-            <div class="flex gap-3" *ngFor="let skill of curriculum.skill">
-              <span>{{ skill.name }} </span>
-              <p-rating
-                [(ngModel)]="skill.level"
-                [cancel]="false"
-                [stars]="7"
-              ></p-rating>
-            </div>
+    <app-curriculum-red-default
+      *ngIf="curriculum.styleCurriculum.color == curriculumStyleEnum.RedDefault"
+      [user]="user"
+      [curriculum]="curriculum"
+    >
+    </app-curriculum-red-default>
+  </div>
 
-            <div
-              class="flex gap-3"
-              *ngFor="let language of curriculum.language"
-            >
-              <span>{{ language.name }} </span>
-              <p-rating
-                [(ngModel)]="language.level"
-                [cancel]="false"
-                [stars]="7"
-              ></p-rating>
-            </div>
-          </div>
+  <div
+    *ngIf="!loading"
+    class="flex flex-column justify-content-start gap-4"
+    style="height: calc(100vh - 160px)"
+  >
+    <p-button
+      class="align-self-start"
+      label="Download PDF"
+      [loading]="loadingPdf"
+      (onClick)="htmlToPdf()"
+      icon="pi pi-print"
+    ></p-button>
+
+    <div class="flex flex-wrap flex-column gap-3">
+      <div *ngFor="let style of curriculumStyleList">
+        <div class="flex align-items-center">
+          <p-radioButton
+            [name]="style"
+            [value]="style"
+            [(ngModel)]="curriculum.styleCurriculum.color"
+            [inputId]="style"
+          ></p-radioButton>
+
+          <label [for]="style" class="ml-2">{{
+            style | enumText : "CurriculumStyleEnum"
+          }}</label>
         </div>
       </div>
     </div>
   </div>
-  <p-button
-    *ngIf="!loading"
-    class="align-self-start"
-    label="Download PDF"
-    [loading]="loadingPdf"
-    (onClick)="htmlToPdf()"
-    icon="pi pi-print"
-  ></p-button>
 </div>
 
 <p-toast></p-toast>

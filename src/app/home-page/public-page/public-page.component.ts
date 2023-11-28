@@ -7,6 +7,7 @@ import { AuthenticateService } from 'src/services/authenticate.service';
 import { CurriculumService } from 'src/services/curriculum.service';
 import { UserService } from 'src/services/user.service';
 import { MessageService } from 'primeng/api';
+import { CurriculumStyleEnum } from 'src/enumerators/curriculumType.enum';
 
 @Component({
   selector: 'app-public-page',
@@ -21,6 +22,8 @@ export class PublicPageComponent implements OnInit {
   curriculum = new Curriculum({});
   page = 0;
   currentPosition;
+  curriculumStyleEnum = CurriculumStyleEnum;
+  curriculumStyleList = Object.values(CurriculumStyleEnum);
 
   constructor(
     private _authenticateService: AuthenticateService,
@@ -36,6 +39,7 @@ export class PublicPageComponent implements OnInit {
     this._curriculumService.getCurriculumUrl(urlParam).subscribe({
       next: (res: any) => {
         this.curriculum = res?.curriculum;
+        this.curriculum.styleCurriculum.color = CurriculumStyleEnum.Default;
         this.currentPosition = this.curriculum.professionalExperience.find(
           (pe) => pe.currentPosition == true
         );

@@ -24,5 +24,10 @@ export const enumerators = {
     'PDF_EXPORT': 'pi pi-download',
     'SHARING_AGILITY': 'pi pi-share-alt',
     'VARIOUS_LAYOUT': 'pi pi-table',
+  },
+
+  'CurriculumStyleEnum': {
+    'DEFAULT': 'Padrão',
+    'RED_DEFAULT': 'Vermelho Padrão'
   }
 }
