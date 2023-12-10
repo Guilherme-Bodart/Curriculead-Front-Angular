@@ -105,7 +105,7 @@
   <div class="flex gap-6 md:flex-row flex-column" *ngIf="!loading">
     <!-- Experiências Profissonais -->
     <ng-container *ngIf="page == 0">
-      <div class="col-12 overflow-x-auto flex gap-3" style="height: 575px">
+      <div class="col-12 flex gap-3" style="height: 575px">
         <div
           *ngFor="
             let professionalExperience of curriculum.professionalExperience;
@@ -242,7 +242,7 @@
 
     <!-- Qualificações Acadêmicas -->
     <ng-container *ngIf="page == 1">
-      <div class="col-12 overflow-x-auto flex gap-3" style="height: 575px">
+      <div class="col-12 flex gap-3" style="height: 575px">
         <div
           *ngFor="
             let academicEducation of curriculum.academicEducation;

@@ -46,7 +46,7 @@ export class User implements IRest {
       this.email = data['email'] || '';
       this.name = data['name'] || '';
       this.gender = data['gender'] || undefined;
-      this.birthday = data['birthday'] || undefined;
+      this.birthday = data['birthday'] || null;
       this.phone = data['phone'] || '';
       this.state = data['state'] || '';
       this.city = data['city'] || '';

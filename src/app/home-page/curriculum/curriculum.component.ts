@@ -37,21 +37,23 @@ export class CurriculumComponent implements OnInit {
   ngOnInit(): void {
     const par = this.activatedRoute.snapshot.paramMap.get('parametro');
     this.user = this._authenticateService.loggedUser;
+
     if (this.user) {
       this._curriculumService
         .getCurriculumUserId(this.user._id)
         .subscribe((res: any) => {
-          this.curriculum = res?.curriculum;
-          this.curriculum.academicEducation.forEach((aE) => {
-            if (aE.startDate) aE.startDate = new Date(aE.startDate);
-            if (aE.endDate) aE.endDate = new Date(aE.endDate);
-          });
+          if (res.curriculum) {
+            this.curriculum = res?.curriculum;
+            this.curriculum.academicEducation.forEach((aE) => {
+              if (aE.startDate) aE.startDate = new Date(aE.startDate);
+              if (aE.endDate) aE.endDate = new Date(aE.endDate);
+            });
 
-          this.curriculum.professionalExperience.forEach((pE) => {
-            if (pE.startDate) pE.startDate = new Date(pE.startDate);
-            if (pE.endDate) pE.endDate = new Date(pE.endDate);
-          });
-
+            this.curriculum.professionalExperience.forEach((pE) => {
+              if (pE.startDate) pE.startDate = new Date(pE.startDate);
+              if (pE.endDate) pE.endDate = new Date(pE.endDate);
+            });
+          }
           this.loading = false;
         });
     }
@@ -83,15 +85,15 @@ export class CurriculumComponent implements OnInit {
   }
 
   saveCurriculum() {
+    this.loading = true;
+     this.curriculum.styleCurriculum = new StyleCurriculum({
+      color: CurriculumStyleEnum.Default,
+      name: 'Estilo',
+    });
     if (this.curriculum.userId) {
-      this.curriculum.styleCurriculum = new StyleCurriculum({
-        color: CurriculumStyleEnum.Default,
-        name: 'Estilo',
-      });
       this._curriculumService
         .updateCurriculum(this.curriculum)
         .subscribe((res: any) => {
-          this.loading = true;
           this.curriculum = res.curriculum;
           this.messageService.add({
             severity: 'success',
@@ -132,10 +134,10 @@ export class CurriculumComponent implements OnInit {
     let bool = false;
 
     if (
-      this.curriculum.url &&
-      this.curriculum.professionalExperience.length &&
-      this.curriculum.academicEducation.length &&
-      this.curriculum.skill.length
+      this.curriculum?.url &&
+      this.curriculum?.professionalExperience?.length &&
+      this.curriculum?.academicEducation?.length &&
+      this.curriculum?.skill?.length
     )
       bool = true;
     return bool;
