@@ -8,8 +8,8 @@
         <div class="flex align-items-center gap-4">
           <label
             for="cargo"
-            class="block text-900 font-medium text-right text-xl"
-            >Link do Currículo</label
+            class="block text-900 font-medium text-right text-3xl"
+            >Link do Currículo*</label
           >
           <input
             [id]="'url-curriculum'"
@@ -479,7 +479,7 @@
       ></button>
     </div>
 
-    <div>
+    <div [title]="'É necessário preencher o Link do Currículo'">
       <button
         *ngIf="page == 3"
         pButton
