@@ -32,13 +32,12 @@ export class CurriculumComponent implements OnInit {
     private _router: Router,
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const par = this.activatedRoute.snapshot.paramMap.get('parametro');
     this.user = this._authenticateService.loggedUser;
-
-    if (this.user) {
+    if (this.user?.curriculumId) {
       this._curriculumService
         .getCurriculumUserId(this.user._id)
         .subscribe((res: any) => {
@@ -56,7 +55,7 @@ export class CurriculumComponent implements OnInit {
           }
           this.loading = false;
         });
-    }
+    } else this.loading = false;
     this.user.birthday = new Date(this.user.birthday);
   }
 
@@ -86,7 +85,7 @@ export class CurriculumComponent implements OnInit {
 
   saveCurriculum() {
     this.loading = true;
-     this.curriculum.styleCurriculum = new StyleCurriculum({
+    this.curriculum.styleCurriculum = new StyleCurriculum({
       color: CurriculumStyleEnum.Default,
       name: 'Estilo',
     });
@@ -122,6 +121,14 @@ export class CurriculumComponent implements OnInit {
             this.loading = false;
             window.location.reload();
           }, 3000);
+        }, (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: error?.error?.error,
+            life: 3000,
+          });
+          this.loading = false;
         });
     }
   }
