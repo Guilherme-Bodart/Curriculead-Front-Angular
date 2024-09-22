@@ -26,5 +26,9 @@ export class SigninPageComponent implements OnInit {
       this._router.navigate([``]);
     })
   }
+
+  goToHome(){
+    this._router.navigate([``]);
+  }
 }
 

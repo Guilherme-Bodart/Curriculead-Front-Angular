@@ -43,8 +43,9 @@ export class PublicPageComponent implements OnInit {
         this.currentPosition = this.curriculum.professionalExperience.find(
           (pe) => pe.currentPosition == true
         );
-        this._userService
-          .getUserId(this.curriculum.userId)
+
+        this._curriculumService
+          .getCurriculumUserId(this.curriculum.userId)
           .subscribe((res: any) => {
             this.user = res.user;
             this.loading = false;

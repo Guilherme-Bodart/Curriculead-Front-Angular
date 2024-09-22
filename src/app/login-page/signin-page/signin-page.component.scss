@@ -1,0 +1,11 @@
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 16px;
+  font-size: 18px;
+  text-decoration: none;
+  color: var(--surface-700);
+  position: absolute;
+  cursor: pointer;
+}

@@ -5,13 +5,13 @@ import { tap } from 'rxjs/operators';
 import { User } from 'src/models/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticateService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   public loggedUser: User;
 
-  private endpoint = 'https://curriculead-back.vercel.app'
+  private endpoint = 'https://curriculead-back.vercel.app';
 
   private _urlRegisterUser = '/auth/register';
 
@@ -19,10 +19,7 @@ export class AuthenticateService {
   private _urlForgotPassword = '/auth/forgot_password';
   private _urlResetPassword = '/auth/reset_password';
 
-  constructor(
-    private _http: HttpClient,
-    private _route: Router
-  ) { }
+  constructor(private _http: HttpClient, private _route: Router) {}
 
   loginUser(user) {
     const url = this.endpoint + this._urlAuthenticateUser;
@@ -32,7 +29,7 @@ export class AuthenticateService {
           this.doLoginUser(data);
         },
         (error) => {
-          console.log(error.error)
+          console.log(error.error);
         }
       )
     );
@@ -41,16 +38,19 @@ export class AuthenticateService {
   // Handle login
   doLoginUser(data) {
     this.loggedUser = data.user;
-    if (data.user)
-      this.storeUser(data.user);
-    if (data.token)
-      this.storeToken(data.token);
+    if (data.user) this.storeUser(data.user);
+    if (data.token) this.storeToken(data.token);
     this._route.navigate(['/onboarding/welcome']);
   }
 
   // Salvar tokens no localstorage
   storeToken(token: string) {
     localStorage.setItem(this.JWT_TOKEN, token);
+  }
+
+  logout() {
+    localStorage.setItem(this.JWT_TOKEN, '');
+    localStorage.setItem('loggedUser', '');
   }
 
   // Retorna o JWT token do localstorage

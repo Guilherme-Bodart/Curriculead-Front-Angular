@@ -1,24 +1,28 @@
 <div class="curriculum">
   <div class="header">
     <div class="name-profession">
-      <span class="name">{{ user.name }}</span>
-      <a [href]="user.github" class="no-underline font-bold link">{{
-        user.github.split("//")[1]
-      }}</a>
-      <a [href]="user.linkedin" class="no-underline font-bold link">{{
-        user.linkedin.split("//")[1].split("www.")[1]
-      }}</a>
+      <span class="name">{{ user?.name }}</span>
+      <ng-container *ngIf="user?.github">
+        <a [href]="user?.github" class="no-underline font-bold link">{{
+          user?.github.split("//")[1]
+        }}</a>
+      </ng-container>
+      <ng-container *ngIf="user?.linkedin">
+        <a [href]="user?.linkedin" class="no-underline font-bold link">{{
+          user?.linkedin.split("//")[1].split("www.")[1]
+        }}</a>
+      </ng-container>
     </div>
 
     <div class="contact">
-      <span class="profession">{{ currentPosition.employer }}</span>
-      <a class="email">{{ user.email }}</a>
-      <a class="phone">{{ user.phone }}</a>
+      <span class="profession">{{ currentPosition?.employer }}</span>
+      <a class="email" *ngIf="user?.email">{{ user?.email }}</a>
+      <a class="phone" *ngIf="user?.phone">{{ user?.phone }}</a>
     </div>
   </div>
   <p-divider></p-divider>
   <div class="about-me">
-    {{ curriculum.aboutMe }}
+    {{ curriculum?.aboutMe }}
   </div>
   <p-divider></p-divider>
   <div class="flex flex-column">
@@ -28,24 +32,24 @@
         <div
           class="flex flex-column gap-1"
           [ngClass]="{
-            'mb-3': i < curriculum.professionalExperience.length - 1
+            'mb-3': i < curriculum?.professionalExperience?.length - 1
           }"
           *ngFor="
-            let experience of curriculum.professionalExperience;
+            let experience of curriculum?.professionalExperience;
             index as i
           "
         >
-          <span class="title">{{ experience.employer }} </span>
-          <span class="title">{{ experience.office }}</span>
+          <span class="title">{{ experience?.employer }} </span>
+          <span class="title">{{ experience?.office }}</span>
           <span class="head">{{
-            (experience.startDate | date : "MMM d, y") +
+            (experience?.startDate | date : "MMM d, y") +
               " - " +
-              (experience.endDate
-                ? (experience.endDate | date : "MMM d, y")
+              (experience?.endDate
+                ? (experience?.endDate | date : "MMM d, y")
                 : "Atual")
           }}</span>
-          <span class="head">{{ experience.responsibility }}</span>
-          <span class="description">{{ experience.description }}</span>
+          <span class="head">{{ experience?.responsibility }}</span>
+          <span class="description">{{ experience?.description }}</span>
         </div>
       </div>
 
@@ -54,18 +58,18 @@
         <div
           class="flex flex-column gap-1"
           [ngClass]="{
-            'mb-3': i < curriculum.professionalExperience.length - 1
+            'mb-3': i < curriculum?.professionalExperience?.length - 1
           }"
-          *ngFor="let education of curriculum.academicEducation; index as i"
+          *ngFor="let education of curriculum?.academicEducation; index as i"
         >
           <span class="title">{{
-            education.schoolName + " - " + education.courseName
+            education?.schoolName + " - " + education?.courseName
           }}</span>
           <span class="head">{{
-            (education.startDate | date : "MMM d, y") +
+            (education?.startDate | date : "MMM d, y") +
               " - " +
-              (education.endDate
-                ? (education.endDate | date : "MMM d, y")
+              (education?.endDate
+                ? (education?.endDate | date : "MMM d, y")
                 : "Atual")
           }}</span>
         </div>
@@ -77,8 +81,8 @@
       <div class="flex flex-column">
         <span class="name mb-3"> Habilidades e Idiomas </span>
         <div class="flex flex-column gap-3 flex-wrap" style="max-height: 240px">
-          <div class="flex gap-3" *ngFor="let skill of curriculum.skill">
-            <span>{{ skill.name }} </span>
+          <div class="flex gap-3" *ngFor="let skill of curriculum?.skill">
+            <span>{{ skill?.name }} </span>
             <p-rating
               [(ngModel)]="skill.level"
               [cancel]="false"
@@ -86,8 +90,8 @@
             ></p-rating>
           </div>
 
-          <div class="flex gap-3" *ngFor="let language of curriculum.language">
-            <span>{{ language.name }} </span>
+          <div class="flex gap-3" *ngFor="let language of curriculum?.language">
+            <span>{{ language?.name }} </span>
             <p-rating [(ngModel)]="language.level" [cancel]="false" [stars]="7">
             </p-rating>
           </div>

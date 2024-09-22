@@ -13,7 +13,8 @@ export class CurriculumService {
   public loggedUser: User;
   private endpoint = 'https://curriculead-back.vercel.app'
   private _urlCurriculum = '/curriculum/';
-  private _urlCurriculumUrl = '/auth/curriculum/';
+  private _urlCurriculumAuth = '/auth/curriculum/';
+  private _urlUserAuth = '/auth/user/';
 
   constructor(
     private _http: HttpClient,
@@ -39,7 +40,7 @@ export class CurriculumService {
     return this._http.put(url, curriculum, { headers });
   }
 
-  getCurriculumUserId(userId){
+  getCurriculumUser(userId){
     const token = this._authenticateService.getJwtToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
@@ -48,8 +49,13 @@ export class CurriculumService {
     return this._http.get(url, { headers });
   }
 
+  getCurriculumUserId(userId){
+    const url = this.endpoint + this._urlUserAuth + userId;
+    return this._http.get(url);
+  }
+
   getCurriculumUrl(urlCurriculum){
-    const url = this.endpoint + this._urlCurriculumUrl + urlCurriculum;
+    const url = this.endpoint + this._urlCurriculumAuth + urlCurriculum;
     return this._http.get(url);
   }
 

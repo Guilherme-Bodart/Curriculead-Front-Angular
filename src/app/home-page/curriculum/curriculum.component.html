@@ -1,496 +1,513 @@
-<div class="surface-section px-4 pt-4 pb-6 md:px-6 lg:px-8 text-center">
-  <!-- Title -->
-  <div>
-    <div class="flex flex-column mb-5 font-bold align-self-baseline">
-      <div class="flex justify-content-between border-bottom-2 border-400 pb-2">
-        <span class="text-900 text-4xl mb-2">{{ user.name }} </span>
-
-        <div class="flex align-items-center gap-4">
-          <label
-            for="cargo"
-            class="block text-900 font-medium text-right text-3xl"
-            >Link do Currículo*</label
-          >
-          <input
-            [id]="'url-curriculum'"
-            style="width: 600px"
-            type="text"
-            placeholder="ex: guilherme-bodart-73"
-            pInputText
-            [(ngModel)]="curriculum.url"
-            [alt]="''"
-          />
-        </div>
-        <a [routerLink]="curriculum.url">
-          <button
-            [disabled]="!curriculum.userId"
-            pButton
-            pRipple
-            label="Currículo Online"
-            [title]="
-              !curriculum.userId
-                ? 'Crie um currículo antes de entrar'
-                : 'Seu currículo público'
-            "
-            class="p-button-lg"
-          ></button>
-        </a>
-      </div>
-      <span class="text-600 text-xl pt-2">
-        {{
-          page == 0
-            ? "Preencha suas experiências profissonais."
-            : page == 1
-            ? "Preencha suas informações acadêmicas."
-            : page == 2
-            ? "Preencha suas habilidades e idiomas."
-            : "Escreva seu objetivo de carreira."
-        }}
-      </span>
-    </div>
-
-    <div class="flex align-items-center justify-content-end" *ngIf="page == 0">
-      <button
-        pButton
-        pRipple
-        icon="pi pi-plus"
-        iconPos="right"
-        label="Adicionar Experiência"
-        (click)="addExperience()"
-        class="p-button-rounded p-button-outlined p-button-lg"
-      ></button>
-    </div>
-
-    <div class="flex align-items-center justify-content-end" *ngIf="page == 1">
-      <button
-        pButton
-        pRipple
-        icon="pi pi-plus"
-        iconPos="right"
-        label="Adicionar Educação"
-        (click)="addAcademic()"
-        class="p-button-rounded p-button-outlined p-button-lg"
-      ></button>
-    </div>
-
-    <div class="flex gap-4 justify-content-end" *ngIf="page == 2">
-      <div class="flex align-items-center">
-        <button
-          pButton
-          pRipple
-          icon="pi pi-plus"
-          iconPos="right"
-          label="Adicionar Habilidades"
-          (click)="addSkills()"
-          class="p-button-rounded p-button-outlined p-button-lg"
-        ></button>
-      </div>
-
-      <div class="flex align-items-center">
-        <button
-          pButton
-          pRipple
-          icon="pi pi-plus"
-          iconPos="right"
-          label="Adicionar Idiomas"
-          (click)="addLanguage()"
-          class="p-button-rounded p-button-outlined p-button-lg"
-        ></button>
-      </div>
-    </div>
-  </div>
-  <!-- Title -->
-  <app-loading-page *ngIf="loading"></app-loading-page>
-
-  <div class="flex gap-6 md:flex-row flex-column" *ngIf="!loading">
-    <!-- Experiências Profissonais -->
-    <ng-container *ngIf="page == 0">
-      <div class="col-12 flex gap-3" style="height: 575px">
+<div
+  *ngIf="loading"
+  class="flex align-items-center justify-content-center"
+  style="height: 60vh; width: 100vw"
+>
+  <app-loading-page></app-loading-page>
+</div>
+<ng-container *ngIf="!loading">
+  <div class="surface-section px-4 pt-4 pb-6 md:px-6 lg:px-8 text-center">
+    <!-- Title -->
+    <div>
+      <div class="flex flex-column mb-5 font-bold align-self-baseline">
         <div
-          *ngFor="
-            let professionalExperience of curriculum.professionalExperience;
-            index as IndexPE
-          "
-          style="min-width: 600px"
+          class="flex justify-content-between border-bottom-2 border-400 pb-2"
         >
-          <div class="flex mb-3 justify-content-between">
-            <span class="text-900 text-2xl mb-3 mr-4">
-              Experiências Profissionais
-            </span>
-            <button
-              pButton
-              pRipple
-              icon="pi pi-times"
-              style="min-width: 32px"
-              (click)="deleteItem(curriculum.professionalExperience, IndexPE)"
-              class="p-element p-ripple p-button-rounded p-button-danger p-button-text p-button p-component p-button-icon-only"
-            ></button>
-          </div>
+          <span class="text-900 text-4xl mb-2">{{ user.name }} </span>
 
-          <div class="flex align-items-center mb-3 gap-4">
-            <label
-              for="empresa"
-              class="block text-900 font-medium mb-2 w-4 text-right text-xl"
-              >Empresa</label
-            >
-            <input
-              [id]="'empresa-curriculum' + IndexPE"
-              type="text"
-              placeholder="ex: Desenvolvedor Jr."
-              pInputText
-              class="mb-3 w-full"
-              [(ngModel)]="professionalExperience.employer"
-            />
-          </div>
-
-          <div class="flex align-items-center mb-3 gap-4">
+          <div class="flex align-items-center gap-4">
             <label
               for="cargo"
-              class="block text-900 font-medium mb-2 w-4 text-right text-xl"
-              >Cargo</label
+              class="block text-900 font-medium text-right text-3xl"
+              >Link do Currículo*</label
             >
             <input
-              [id]="'cargo-curriculum' + IndexPE"
+              [id]="'url-curriculum'"
+              style="width: 600px"
               type="text"
-              placeholder="ex: Desenvolvedor Jr."
+              placeholder="ex: guilherme-bodart-73"
               pInputText
-              class="mb-3 w-full"
-              [(ngModel)]="professionalExperience.office"
+              [(ngModel)]="curriculum.url"
+              [alt]="''"
             />
           </div>
+          <a [routerLink]="curriculum.url">
+            <button
+              [disabled]="!curriculum.userId"
+              pButton
+              pRipple
+              label="Currículo Online"
+              [title]="
+                !curriculum.userId
+                  ? 'Crie um currículo antes de entrar'
+                  : 'Seu currículo público'
+              "
+              class="p-button-lg"
+            ></button>
+          </a>
+        </div>
+        <span class="text-600 text-xl pt-2">
+          {{
+            page == 0
+              ? "Preencha suas experiências profissonais."
+              : page == 1
+              ? "Preencha suas informações acadêmicas."
+              : page == 2
+              ? "Preencha suas habilidades e idiomas."
+              : "Escreva seu objetivo de carreira."
+          }}
+        </span>
+      </div>
 
-          <div class="flex align-items-center mb-3 gap-4">
-            <label
-              for="name"
-              class="block text-900 font-medium mb-2 w-4 text-right text-xl"
-              >Responsabilidade</label
-            >
-            <input
-              [id]="'responsibility-curriculum' + IndexPE"
-              type="text"
-              placeholder="ex: Desenvolvia um sistema Web em Angular"
-              pInputText
-              class="mb-3 w-full"
-              name="responsibility-curriculum"
-              [(ngModel)]="professionalExperience.responsibility"
-            />
-          </div>
+      <div
+        class="flex align-items-center justify-content-end"
+        *ngIf="page == 0"
+      >
+        <button
+          pButton
+          pRipple
+          icon="pi pi-plus"
+          iconPos="right"
+          label="Adicionar Experiência"
+          (click)="addExperience()"
+          class="p-button-rounded p-button-outlined p-button-lg"
+        ></button>
+      </div>
 
-          <div class="flex align-items-center mb-3 gap-4">
-            <label
-              for="state"
-              class="block text-900 font-medium mb-2 w-4 text-right text-xl"
-              >Descrição</label
-            >
-            <textarea
-              [id]="'description-curriculum' + IndexPE"
-              type="text"
-              placeholder="Escreva com mais detalhes sua experiência"
-              pInputText
-              rows="6"
-              autoResize="true"
-              class="mb-3 w-full"
-              name="description-curriculum"
-              [(ngModel)]="professionalExperience.description"
-            ></textarea>
+      <div
+        class="flex align-items-center justify-content-end"
+        *ngIf="page == 1"
+      >
+        <button
+          pButton
+          pRipple
+          icon="pi pi-plus"
+          iconPos="right"
+          label="Adicionar Educação"
+          (click)="addAcademic()"
+          class="p-button-rounded p-button-outlined p-button-lg"
+        ></button>
+      </div>
+
+      <div class="flex gap-4 justify-content-end" *ngIf="page == 2">
+        <div class="flex align-items-center">
+          <button
+            pButton
+            pRipple
+            icon="pi pi-plus"
+            iconPos="right"
+            label="Adicionar Habilidades"
+            (click)="addSkills()"
+            class="p-button-rounded p-button-outlined p-button-lg"
+          ></button>
+        </div>
+
+        <div class="flex align-items-center">
+          <button
+            pButton
+            pRipple
+            icon="pi pi-plus"
+            iconPos="right"
+            label="Adicionar Idiomas"
+            (click)="addLanguage()"
+            class="p-button-rounded p-button-outlined p-button-lg"
+          ></button>
+        </div>
+      </div>
+    </div>
+    <!-- Title -->
+    <app-loading-page *ngIf="loading"></app-loading-page>
+
+    <div class="flex gap-6 md:flex-row flex-column" *ngIf="!loading">
+      <!-- Experiências Profissonais -->
+      <ng-container *ngIf="page == 0">
+        <div class="col-12 flex gap-3" style="height: 575px">
+          <div
+            *ngFor="
+              let professionalExperience of curriculum.professionalExperience;
+              index as IndexPE
+            "
+            style="min-width: 600px"
+          >
+            <div class="flex mb-3 justify-content-between">
+              <span class="text-900 text-2xl mb-3 mr-4">
+                Experiências Profissionais
+              </span>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-times"
+                style="min-width: 32px"
+                (click)="deleteItem(curriculum.professionalExperience, IndexPE)"
+                class="p-element p-ripple p-button-rounded p-button-danger p-button-text p-button p-component p-button-icon-only"
+              ></button>
+            </div>
+
+            <div class="flex align-items-center mb-3 gap-4">
+              <label
+                for="empresa"
+                class="block text-900 font-medium mb-2 w-4 text-right text-xl"
+                >Empresa</label
+              >
+              <input
+                [id]="'empresa-curriculum' + IndexPE"
+                type="text"
+                placeholder="ex: IFES"
+                pInputText
+                class="mb-3 w-full"
+                [(ngModel)]="professionalExperience.employer"
+              />
+            </div>
+
+            <div class="flex align-items-center mb-3 gap-4">
+              <label
+                for="cargo"
+                class="block text-900 font-medium mb-2 w-4 text-right text-xl"
+                >Cargo</label
+              >
+              <input
+                [id]="'cargo-curriculum' + IndexPE"
+                type="text"
+                placeholder="ex: Desenvolvedor Jr."
+                pInputText
+                class="mb-3 w-full"
+                [(ngModel)]="professionalExperience.office"
+              />
+            </div>
+
+            <div class="flex align-items-center mb-3 gap-4">
+              <label
+                for="name"
+                class="block text-900 font-medium mb-2 w-4 text-right text-xl"
+                >Responsabilidade</label
+              >
+              <input
+                [id]="'responsibility-curriculum' + IndexPE"
+                type="text"
+                placeholder="ex: Desenvolvia um sistema Web em Angular"
+                pInputText
+                class="mb-3 w-full"
+                name="responsibility-curriculum"
+                [(ngModel)]="professionalExperience.responsibility"
+              />
+            </div>
+
+            <div class="flex align-items-center mb-3 gap-4">
+              <label
+                for="state"
+                class="block text-900 font-medium mb-2 w-4 text-right text-xl"
+                >Descrição</label
+              >
+              <textarea
+                [id]="'description-curriculum' + IndexPE"
+                type="text"
+                placeholder="Escreva com mais detalhes sua experiência"
+                pInputText
+                rows="6"
+                autoResize="true"
+                class="mb-3 w-full"
+                name="description-curriculum"
+                [(ngModel)]="professionalExperience.description"
+              ></textarea>
+            </div>
+            <div class="flex gap-3 justify-content-end">
+              <div class="flex align-items-center w-3 flex-column mb-3">
+                <label
+                  for="birthday"
+                  class="block text-900 font-medium mb-2 text-right text-xl"
+                  >Data de Início</label
+                >
+                <p-calendar
+                  class="block text-900 font-medium mb-3 w-full"
+                  dateFormat="dd/mm/yy"
+                  [(ngModel)]="professionalExperience.startDate"
+                  [readonlyInput]="true"
+                ></p-calendar>
+              </div>
+
+              <div class="flex align-items-center w-3 flex-column mb-3">
+                <label
+                  for="birthday"
+                  class="block text-900 font-medium mb-2 text-right text-xl"
+                  >Data de Fim</label
+                >
+                <p-calendar
+                  class="block text-900 font-medium mb-3 w-full"
+                  dateFormat="dd/mm/yy"
+                  [(ngModel)]="professionalExperience.endDate"
+                  [readonlyInput]="true"
+                ></p-calendar>
+              </div>
+
+              <div class="flex align-items-center flex-column gap-2">
+                <label
+                  for="currentPosition"
+                  class="block text-900 font-medium mb-2 text-right text-lg"
+                  >Emprego Atual</label
+                >
+                <p-inputSwitch
+                  (click)="currentPosition(IndexPE)"
+                  [(ngModel)]="professionalExperience.currentPosition"
+                ></p-inputSwitch>
+              </div>
+            </div>
           </div>
-          <div class="flex gap-3 justify-content-end">
-            <div class="flex align-items-center w-3 flex-column mb-3">
+        </div>
+      </ng-container>
+      <!-- Experiências Profissonais -->
+
+      <!-- Qualificações Acadêmicas -->
+      <ng-container *ngIf="page == 1">
+        <div class="col-12 flex gap-3" style="height: 575px">
+          <div
+            *ngFor="
+              let academicEducation of curriculum.academicEducation;
+              index as IndexAE
+            "
+            style="min-width: 600px"
+          >
+            <div class="flex mb-3 justify-content-between">
+              <span class="text-900 text-2xl mb-3 mr-4"
+                >Informações Acadêmicas</span
+              >
+              <button
+                pButton
+                pRipple
+                icon="pi pi-times p-button-lg"
+                style="min-width: 32px"
+                (click)="deleteItem(curriculum.academicEducation, IndexAE)"
+                class="p-element p-ripple p-button-rounded p-button-danger p-button-text p-button p-component p-button-icon-only"
+              ></button>
+            </div>
+
+            <div class="flex align-items-center mb-3 gap-4">
+              <label
+                for="coursename"
+                class="block text-900 font-medium mb-2 w-4 text-right text-xl"
+                >Nome do Curso</label
+              >
+              <input
+                [id]="'coursename-curriculum' + IndexAE"
+                type="text"
+                placeholder="ex: Bachalerado em Sistemas de Informações"
+                pInputText
+                class="mb-3 w-full"
+                [(ngModel)]="academicEducation.courseName"
+              />
+            </div>
+
+            <div class="flex align-items-center mb-3 gap-4">
+              <label
+                for="schoolname"
+                class="block text-900 font-medium mb-2 w-4 text-right text-xl"
+                >Instituição Acadêmica</label
+              >
+              <input
+                [id]="'schoolname-curriculum' + IndexAE"
+                type="text"
+                placeholder="ex: Instituto Federal do Espírito Santo - Serra"
+                pInputText
+                class="mb-3 w-full"
+                name="schoolname-curriculum"
+                [(ngModel)]="academicEducation.schoolName"
+              />
+            </div>
+
+            <div class="flex align-items-center mb-3 gap-4">
               <label
                 for="birthday"
-                class="block text-900 font-medium mb-2 text-right text-xl"
+                class="block text-900 font-medium mb-2 w-4 text-right text-xl"
                 >Data de Início</label
               >
               <p-calendar
                 class="block text-900 font-medium mb-3 w-full"
                 dateFormat="dd/mm/yy"
-                [(ngModel)]="professionalExperience.startDate"
+                [(ngModel)]="academicEducation.startDate"
                 [readonlyInput]="true"
               ></p-calendar>
             </div>
 
-            <div class="flex align-items-center w-3 flex-column mb-3">
+            <div class="flex align-items-center mb-3 gap-4">
               <label
                 for="birthday"
-                class="block text-900 font-medium mb-2 text-right text-xl"
+                class="block text-900 font-medium mb-2 w-4 text-right text-xl"
                 >Data de Fim</label
               >
               <p-calendar
                 class="block text-900 font-medium mb-3 w-full"
                 dateFormat="dd/mm/yy"
-                [(ngModel)]="professionalExperience.endDate"
+                [(ngModel)]="academicEducation.endDate"
                 [readonlyInput]="true"
               ></p-calendar>
             </div>
+          </div>
+        </div>
+      </ng-container>
+      <!-- Qualificações Acadêmicas -->
 
-            <div class="flex align-items-center flex-column gap-2">
-              <label
-                for="currentPosition"
-                class="block text-900 font-medium mb-2 text-right text-lg"
-                >Emprego Atual</label
-              >
-              <p-inputSwitch
-                (click)="currentPosition(IndexPE)"
-                [(ngModel)]="professionalExperience.currentPosition"
-              ></p-inputSwitch>
+      <!-- Habilidades e Idiomas -->
+      <ng-container *ngIf="page == 2">
+        <div
+          class="col-12 overflow-auto flex gap-3 justify-content-between"
+          style="height: 575px"
+        >
+          <div
+            class="col-12 md:col-8 lg:col-6 overflow-auto"
+            style="height: 550px"
+          >
+            <div class="flex mb-3">
+              <span class="text-900 text-2xl mb-3">Habilidades</span>
+            </div>
+
+            <div *ngFor="let skill of curriculum.skill; index as IndexHI">
+              <div class="flex align-items-center mb-3 gap-4">
+                <label
+                  for="skillName"
+                  class="block text-900 font-medium mb-2 text-right text-xl"
+                  >Nome</label
+                >
+                <input
+                  [id]="'skill-curriculum' + IndexHI"
+                  type="text"
+                  placeholder="ex: React"
+                  pInputText
+                  class="mb-3"
+                  style="width: 200px"
+                  [(ngModel)]="skill.name"
+                />
+
+                <p-rating
+                  [(ngModel)]="skill.level"
+                  [cancel]="false"
+                  [stars]="7"
+                ></p-rating>
+
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-times"
+                  style="min-width: 32px"
+                  (click)="deleteItem(curriculum.skill, IndexHI)"
+                  class="p-element p-ripple p-button-rounded p-button-danger p-button-text p-button p-component p-button-icon-only"
+                ></button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-12 md:col-8 lg:col-5 overflow-auto"
+            style="height: 550px"
+          >
+            <div class="flex mb-3">
+              <span class="text-900 text-2xl mb-3">Idiomas</span>
+            </div>
+            <div *ngFor="let language of curriculum.language; index as IndexL">
+              <div class="flex align-items-center mb-3 gap-4">
+                <label
+                  for="languagename"
+                  class="block text-900 font-medium mb-2 text-right text-xl"
+                  >Nome</label
+                >
+                <input
+                  [id]="'languagname-curriculum' + IndexL"
+                  type="text"
+                  placeholder="ex: Inglês"
+                  pInputText
+                  class="mb-3"
+                  style="width: 200px"
+                  [(ngModel)]="language.name"
+                />
+
+                <p-rating
+                  [(ngModel)]="language.level"
+                  [cancel]="false"
+                  [stars]="7"
+                ></p-rating>
+
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-times"
+                  style="min-width: 32px"
+                  (click)="deleteItem(curriculum.language, IndexL)"
+                  class="p-element p-ripple p-button-rounded p-button-danger p-button-text p-button p-component p-button-icon-only"
+                ></button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </ng-container>
-    <!-- Experiências Profissonais -->
+      </ng-container>
+      <!-- Habilidades e Idiomas -->
 
-    <!-- Qualificações Acadêmicas -->
-    <ng-container *ngIf="page == 1">
-      <div class="col-12 flex gap-3" style="height: 575px">
+      <!-- Sobre mim -->
+      <ng-container *ngIf="page == 3">
         <div
-          *ngFor="
-            let academicEducation of curriculum.academicEducation;
-            index as IndexAE
-          "
-          style="min-width: 600px"
+          class="col-12 flex flex-column align-items-center"
+          style="height: 575px"
         >
-          <div class="flex mb-3 justify-content-between">
-            <span class="text-900 text-2xl mb-3 mr-4"
-              >Informações Acadêmicas</span
-            >
-            <button
-              pButton
-              pRipple
-              icon="pi pi-times p-button-lg"
-              style="min-width: 32px"
-              (click)="deleteItem(curriculum.academicEducation, IndexAE)"
-              class="p-element p-ripple p-button-rounded p-button-danger p-button-text p-button p-component p-button-icon-only"
-            ></button>
+          <div class="flex flex-column mb-3">
+            <span class="text-900 text-2xl mb-3">Sobre mim</span>
+            <span class="text-500 mb-3"
+              >Descreva suas conquitas, seus objetivos, hobbies e conte um pouco
+              mais sobre você
+            </span>
           </div>
-
-          <div class="flex align-items-center mb-3 gap-4">
-            <label
-              for="coursename"
-              class="block text-900 font-medium mb-2 w-4 text-right text-xl"
-              >Nome do Curso</label
-            >
-            <input
-              [id]="'coursename-curriculum' + IndexAE"
-              type="text"
-              placeholder="ex: Bachalerado em Sistemas de Informações"
-              pInputText
-              class="mb-3 w-full"
-              [(ngModel)]="academicEducation.courseName"
-            />
-          </div>
-
-          <div class="flex align-items-center mb-3 gap-4">
-            <label
-              for="schoolname"
-              class="block text-900 font-medium mb-2 w-4 text-right text-xl"
-              >Instituição Acadêmica</label
-            >
-            <input
-              [id]="'schoolname-curriculum' + IndexAE"
-              type="text"
-              placeholder="ex: Instituto Federal do Espírito Santo - Serra"
-              pInputText
-              class="mb-3 w-full"
-              name="schoolname-curriculum"
-              [(ngModel)]="academicEducation.schoolName"
-            />
-          </div>
-
-          <div class="flex align-items-center mb-3 gap-4">
-            <label
-              for="birthday"
-              class="block text-900 font-medium mb-2 w-4 text-right text-xl"
-              >Data de Início</label
-            >
-            <p-calendar
-              class="block text-900 font-medium mb-3 w-full"
-              dateFormat="dd/mm/yy"
-              [(ngModel)]="academicEducation.startDate"
-              [readonlyInput]="true"
-            ></p-calendar>
-          </div>
-
-          <div class="flex align-items-center mb-3 gap-4">
-            <label
-              for="birthday"
-              class="block text-900 font-medium mb-2 w-4 text-right text-xl"
-              >Data de Fim</label
-            >
-            <p-calendar
-              class="block text-900 font-medium mb-3 w-full"
-              dateFormat="dd/mm/yy"
-              [(ngModel)]="academicEducation.endDate"
-              [readonlyInput]="true"
-            ></p-calendar>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-    <!-- Qualificações Acadêmicas -->
-
-    <!-- Habilidades e Idiomas -->
-    <ng-container *ngIf="page == 2">
-      <div
-        class="col-12 overflow-auto flex gap-3 justify-content-between"
-        style="height: 575px"
-      >
-        <div
-          class="col-12 md:col-8 lg:col-6 overflow-auto"
-          style="height: 550px"
-        >
-          <div class="flex mb-3">
-            <span class="text-900 text-2xl mb-3">Habilidades</span>
-          </div>
-
-          <div *ngFor="let skill of curriculum.skill; index as IndexHI">
+          <div class="col-6 overflow-auto">
             <div class="flex align-items-center mb-3 gap-4">
-              <label
-                for="skillName"
-                class="block text-900 font-medium mb-2 text-right text-xl"
-                >Nome</label
-              >
-              <input
-                [id]="'skill-curriculum' + IndexHI"
+              <textarea
+                [id]="'aboutme-curriculum'"
                 type="text"
-                placeholder="ex: React"
+                placeholder="Escreva sobre você e seus objetivos"
                 pInputText
-                class="mb-3"
-                style="width: 200px"
-                [(ngModel)]="skill.name"
-              />
-
-              <p-rating
-                [(ngModel)]="skill.level"
-                [cancel]="false"
-                [stars]="7"
-              ></p-rating>
-
-              <button
-                pButton
-                pRipple
-                icon="pi pi-times"
-                style="min-width: 32px"
-                (click)="deleteItem(curriculum.skill, IndexHI)"
-                class="p-element p-ripple p-button-rounded p-button-danger p-button-text p-button p-component p-button-icon-only"
-              ></button>
+                rows="6"
+                autoResize="true"
+                class="mb-3 w-full"
+                name="aboutme-curriculum"
+                [(ngModel)]="curriculum.aboutMe"
+              ></textarea>
             </div>
           </div>
         </div>
+      </ng-container>
+      <!-- Sobre mim -->
+    </div>
 
-        <div
-          class="col-12 md:col-8 lg:col-5 overflow-auto"
-          style="height: 550px"
-        >
-          <div class="flex mb-3">
-            <span class="text-900 text-2xl mb-3">Idiomas</span>
-          </div>
-          <div *ngFor="let language of curriculum.language; index as IndexL">
-            <div class="flex align-items-center mb-3 gap-4">
-              <label
-                for="languagename"
-                class="block text-900 font-medium mb-2 text-right text-xl"
-                >Nome</label
-              >
-              <input
-                [id]="'languagname-curriculum' + IndexL"
-                type="text"
-                placeholder="ex: Inglês"
-                pInputText
-                class="mb-3"
-                style="width: 200px"
-                [(ngModel)]="language.name"
-              />
-
-              <p-rating
-                [(ngModel)]="language.level"
-                [cancel]="false"
-                [stars]="7"
-              ></p-rating>
-
-              <button
-                pButton
-                pRipple
-                icon="pi pi-times"
-                style="min-width: 32px"
-                (click)="deleteItem(curriculum.language, IndexL)"
-                class="p-element p-ripple p-button-rounded p-button-danger p-button-text p-button p-component p-button-icon-only"
-              ></button>
-            </div>
-          </div>
-        </div>
+    <div class="flex">
+      <div class="w-full">
+        <button
+          *ngIf="page != 0"
+          pButton
+          pRipple
+          label="Anterior"
+          class="p-button-lg flex justify-content-end"
+          (click)="previousPage()"
+        ></button>
       </div>
-    </ng-container>
-    <!-- Habilidades e Idiomas -->
 
-    <!-- Sobre mim -->
-    <ng-container *ngIf="page == 3">
-      <div
-        class="col-12 flex flex-column align-items-center"
-        style="height: 575px"
-      >
-        <div class="flex flex-column mb-3">
-          <span class="text-900 text-2xl mb-3">Sobre mim</span>
-          <span class="text-500 mb-3"
-            >Descreva suas conquitas, seus objetivos, hobbies e conte um pouco
-            mais sobre você
-          </span>
-        </div>
-        <div class="col-6 overflow-auto">
-          <div class="flex align-items-center mb-3 gap-4">
-            <textarea
-              [id]="'aboutme-curriculum'"
-              type="text"
-              placeholder="Escreva sobre você e seus objetivos"
-              pInputText
-              rows="6"
-              autoResize="true"
-              class="mb-3 w-full"
-              name="aboutme-curriculum"
-              [(ngModel)]="curriculum.aboutMe"
-            ></textarea>
-          </div>
-        </div>
+      <div>
+        <button
+          *ngIf="page != 3"
+          pButton
+          pRipple
+          label="Próximo"
+          (click)="nextPage()"
+          class="p-button-lg"
+        ></button>
       </div>
-    </ng-container>
-    <!-- Sobre mim -->
+
+      <div [title]="'É necessário preencher o Link do Currículo'">
+        <button
+          *ngIf="page == 3"
+          pButton
+          pRipple
+          label="Salvar"
+          [disabled]="!saveButton()"
+          (click)="saveCurriculum()"
+          class="p-button-lg"
+        ></button>
+      </div>
+    </div>
   </div>
 
-  <div class="flex">
-    <div class="w-full">
-      <button
-        *ngIf="page != 0"
-        pButton
-        pRipple
-        label="Anterior"
-        class="p-button-lg flex justify-content-end"
-        (click)="previousPage()"
-      ></button>
-    </div>
-
-    <div>
-      <button
-        *ngIf="page != 3"
-        pButton
-        pRipple
-        label="Próximo"
-        (click)="nextPage()"
-        class="p-button-lg"
-      ></button>
-    </div>
-
-    <div [title]="'É necessário preencher o Link do Currículo'">
-      <button
-        *ngIf="page == 3"
-        pButton
-        pRipple
-        label="Salvar"
-        [disabled]="!saveButton()"
-        (click)="saveCurriculum()"
-        class="p-button-lg"
-      ></button>
-    </div>
-  </div>
-</div>
-
-<p-toast></p-toast>
+  <p-toast></p-toast>
+</ng-container>

@@ -1,10 +1,9 @@
 <div class="text-center mb-5">
-  <img
-    src="assets/images/blocks/logos/hyper.svg"
-    alt="Image"
-    height="50"
-    class="mb-3"
-  />
+  <a class="menu-item" (click)="goToLogin()">
+    <i [class]="'pi pi-fw pi-arrow-left '"></i>
+    <span>{{ "Voltar" }}</span>
+  </a>
+  <img [src]="'/assets/logo2.jpeg'" style="width: 130px; height: 130px" />
   <div class="text-900 text-3xl font-medium mb-3">Cadastre-se agora!</div>
 </div>
 
@@ -63,5 +62,4 @@
     class="w-full"
     (click)="registerUser()"
   ></button>
-
 </div>

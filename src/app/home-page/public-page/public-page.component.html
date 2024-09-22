@@ -5,21 +5,29 @@
   <div *ngIf="!loading" [id]="'curriculum'">
     <app-curriculum-default
       *ngIf="curriculum.styleCurriculum.color == curriculumStyleEnum.Default"
-      [user]="user" [curriculum]="curriculum">
+      [user]="user"
+      [curriculum]="curriculum"
+    >
     </app-curriculum-default>
 
     <app-curriculum-red-default
       *ngIf="curriculum.styleCurriculum.color == curriculumStyleEnum.RedDefault"
-      [user]="user" [curriculum]="curriculum">
+      [user]="user"
+      [curriculum]="curriculum"
+    >
     </app-curriculum-red-default>
   </div>
 
   <div
-    *ngIf="!loading" style="height: calc(100vh - 160px)"
-    class="flex flex-column justify-content-start gap-4">
+    *ngIf="!loading"
+    class="flex flex-column justify-content-start gap-4"
+    style="height: calc(100vh - 160px)"
+  >
     <p-button
-      class="align-self-start" label="Download PDF"
-      [loading]="loadingPdf" (onClick)="htmlToPdf()"
+      class="align-self-start"
+      label="Download PDF"
+      [loading]="loadingPdf"
+      (onClick)="htmlToPdf()"
       icon="pi pi-print"
     ></p-button>
 
@@ -27,11 +35,15 @@
       <div *ngFor="let style of curriculumStyleList">
         <div class="flex align-items-center">
           <p-radioButton
-            [name]="style" [value]="style"
+            [name]="style"
+            [value]="style"
             [(ngModel)]="curriculum.styleCurriculum.color"
-            [inputId]="style"></p-radioButton>
+            [inputId]="style"
+          ></p-radioButton>
 
-          <label [for]="style" class="ml-2">{{ style | enumText : "CurriculumStyleEnum" }}</label>
+          <label [for]="style" class="ml-2">{{
+            style | enumText : "CurriculumStyleEnum"
+          }}</label>
         </div>
       </div>
     </div>

@@ -23,7 +23,8 @@ export class PerfilAccountComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = this._authenticateService.loggedUser;
+    this.user = new User(JSON.parse(this._authenticateService.getStoreUser()));
+
     if (this.user) {
       this.updateUser();
     }

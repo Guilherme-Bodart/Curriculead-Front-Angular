@@ -33,4 +33,8 @@ export class RegisterPageComponent implements OnInit {
     })
   }
 
+  goToLogin(){
+    this._router.navigate([`/login`]);
+  }
+
 }

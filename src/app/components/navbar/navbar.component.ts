@@ -43,6 +43,7 @@ export class NavbarComponent implements OnInit {
 
   onActiveItemChange(item: MenuItem) {
     this.activeItem = item;
+    if(this.activeItem.label == 'Sair') this._authenticateService.logout();
   }
 
   routeItem(item: MenuItem): string {
