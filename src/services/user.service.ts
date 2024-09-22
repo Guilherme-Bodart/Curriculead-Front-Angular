@@ -11,7 +11,7 @@ export class UserService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   public loggedUser: User;
 
-  private endpoint = 'http://localhost:3030'
+  private endpoint = 'https://curriculead-back.vercel.app';
   private _urlUser = '/user/';
 
   constructor(

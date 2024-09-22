@@ -70,6 +70,7 @@
           iconPos="right"
           label="Adicionar Experiência"
           (click)="addExperience()"
+          (touchstart)="addExperience()"
           class="p-button-rounded p-button-outlined p-button-lg"
         ></button>
       </div>
@@ -85,6 +86,7 @@
           iconPos="right"
           label="Adicionar Educação"
           (click)="addAcademic()"
+          (touchstart)="addAcademic()"
           class="p-button-rounded p-button-outlined p-button-lg"
         ></button>
       </div>
@@ -98,6 +100,7 @@
             iconPos="right"
             label="Adicionar Habilidades"
             (click)="addSkills()"
+            (touchstart)="addSkills()"
             class="p-button-rounded p-button-outlined p-button-lg"
           ></button>
         </div>
@@ -110,6 +113,7 @@
             iconPos="right"
             label="Adicionar Idiomas"
             (click)="addLanguage()"
+            (touchstart)="addLanguage()"
             class="p-button-rounded p-button-outlined p-button-lg"
           ></button>
         </div>
@@ -139,6 +143,7 @@
                 icon="pi pi-times"
                 style="min-width: 32px"
                 (click)="deleteItem(curriculum.professionalExperience, IndexPE)"
+                (touchstart)="deleteItem(curriculum.professionalExperience, IndexPE)"
                 class="p-element p-ripple p-button-rounded p-button-danger p-button-text p-button p-component p-button-icon-only"
               ></button>
             </div>
@@ -247,6 +252,7 @@
                 >
                 <p-inputSwitch
                   (click)="currentPosition(IndexPE)"
+                  (touchstart)="currentPosition(IndexPE)"
                   [(ngModel)]="professionalExperience.currentPosition"
                 ></p-inputSwitch>
               </div>
@@ -276,6 +282,7 @@
                 icon="pi pi-times p-button-lg"
                 style="min-width: 32px"
                 (click)="deleteItem(curriculum.academicEducation, IndexAE)"
+                (touchstart)="deleteItem(curriculum.academicEducation, IndexAE)"
                 class="p-element p-ripple p-button-rounded p-button-danger p-button-text p-button p-component p-button-icon-only"
               ></button>
             </div>
@@ -388,6 +395,7 @@
                   icon="pi pi-times"
                   style="min-width: 32px"
                   (click)="deleteItem(curriculum.skill, IndexHI)"
+                  (touchStart)="deleteItem(curriculum.skill, IndexHI)"
                   class="p-element p-ripple p-button-rounded p-button-danger p-button-text p-button p-component p-button-icon-only"
                 ></button>
               </div>
@@ -430,6 +438,7 @@
                   icon="pi pi-times"
                   style="min-width: 32px"
                   (click)="deleteItem(curriculum.language, IndexL)"
+                  (touchStart)="deleteItem(curriculum.skill, IndexL)"
                   class="p-element p-ripple p-button-rounded p-button-danger p-button-text p-button p-component p-button-icon-only"
                 ></button>
               </div>

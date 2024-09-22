@@ -11,7 +11,7 @@ export class AuthenticateService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   public loggedUser: User;
 
-  private endpoint = 'http://localhost:3030';
+  private endpoint = 'https://curriculead-back.vercel.app';
 
   private _urlRegisterUser = '/auth/register';
 
@@ -38,6 +38,7 @@ export class AuthenticateService {
   // Handle login
   doLoginUser(data) {
     this.loggedUser = data.user;
+
     if (data.user) this.storeUser(data.user);
     if (data.token) this.storeToken(data.token);
     this._route.navigate(['/onboarding/welcome']);
