@@ -2,17 +2,17 @@
   <div class="header">
     <div class="name-profession">
       <span class="name">{{ user?.name }}</span>
-      <span class="profession">{{ currentPosition.employer }}</span>
+      <span class="profession">{{ currentPosition?.employer }}</span>
     </div>
     <div class="contact">
       <ng-container *ngIf="user?.github">
         <a [href]="user?.github" class="no-underline font-bold link">{{
-          user?.github.split("//")[1]
+          user?.github?.split("//")[1]
         }}</a>
       </ng-container>
       <ng-container *ngIf="user?.linkedin">
         <a [href]="user?.linkedin" class="no-underline font-bold link">{{
-          user?.linkedin.split("//")[1].split("www.")[1]
+          user?.linkedin?.split("//")[1]?.split("www.")[1]
         }}</a>
       </ng-container>
       <a class="email">{{ user?.email }}</a>
