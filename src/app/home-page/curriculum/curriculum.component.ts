@@ -39,8 +39,10 @@ export class CurriculumComponent implements OnInit {
     this.user = new User(
       JSON.parse(this._authenticateService.getStoreUser())
     );
+    console.log(this.user);
 
-    if (this.user) {
+
+    if (this.user.curriculumId) {
       this._curriculumService.getCurriculumUser(this.user._id).subscribe(
         (res: any) => {
           if (res.curriculum) {
@@ -62,8 +64,8 @@ export class CurriculumComponent implements OnInit {
           this._router.navigate([`/login`]);
         }
       );
-    } else {
-      this._router.navigate([`/login`]);
+    }else{
+      this.loading = false;
     }
   }
 

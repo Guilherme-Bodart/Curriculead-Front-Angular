@@ -11,7 +11,7 @@ export class AuthenticateService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   public loggedUser: User;
 
-  private endpoint = 'https://curriculead-back.vercel.app';
+  private endpoint = 'http://localhost:3030';
 
   private _urlRegisterUser = '/auth/register';
 

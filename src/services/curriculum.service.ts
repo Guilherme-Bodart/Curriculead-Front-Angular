@@ -11,7 +11,7 @@ import { Curriculum } from 'src/models/curriculum';
 export class CurriculumService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   public loggedUser: User;
-  private endpoint = 'https://curriculead-back.vercel.app'
+  private endpoint = 'http://localhost:3030'
   private _urlCurriculum = '/curriculum/';
   private _urlCurriculumAuth = '/auth/curriculum/';
   private _urlUserAuth = '/auth/user/';
