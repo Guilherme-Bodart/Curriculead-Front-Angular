@@ -52,6 +52,7 @@ export class User implements IRest {
       this.city = data['city'] || '';
       this.linkedin = data['linkedin'] || '';
       this.github = data['github'] || '';
+      this.curriculumId = data['curriculumId'] || '';
     }
     return this;
   }
